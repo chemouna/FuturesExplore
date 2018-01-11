@@ -11,6 +11,11 @@ public class FrameModel {
         });
 
         provider.getActiveThing();
+
+        // what do we want ? here
+
+        // the options we have are to block or provide a callable thing ?
+        System.out.println("Next action in FrameModel can now run (will determine whether getting active thing blocked us)");
     }
 
 }

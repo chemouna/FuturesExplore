@@ -15,6 +15,8 @@ class Provider {
 
     public Thing getActiveThing() {
         ModelKeeper modelKeeper = modelKeeperSupplier.get();
+
+        // what can we do ?
         modelKeeper.applyModel(new ModelApplier<MainModel>() {
             @Override
             public void with(MainModel model) {
