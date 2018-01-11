@@ -5,11 +5,8 @@ public class FrameModel {
     public static void main(String[] args) {
         Provider provider = new Provider(() -> {
             // Im a slow supplier, so lets wait for a while
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-
-            }
+            //Thread.sleep(1000);
+            Misc.sleepWithProgress("Supplier of ModelKeeper ");
             return new ModelKeeper();
         });
 

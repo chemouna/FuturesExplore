@@ -22,10 +22,12 @@ class Provider {
             }
         });
 
+        System.out.println("Done getting and applying the model");
         return findActiveThing();
     }
 
     private Thing findActiveThing() {
+        System.out.println("Start finding the active thing");
         String thingParam = "";
         List<MainElement> elements = mModel.getElements();
         for (MainElement element : elements) {

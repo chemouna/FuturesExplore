@@ -13,10 +13,8 @@ public class ModelKeeper {
 
     public void applyModel(ModelApplier<MainModel> modelApplier) {
         // this is slow too so let imitate that
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-        }
+        //Thread.sleep(10000);
+        Misc.sleepWithProgress("Applying the model ");
         modelApplier.with(downloadedData.model);
     }
 
