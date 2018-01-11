@@ -2,10 +2,8 @@ package com.mounacheikhna.futuresexplore;
 
 import com.google.common.base.Supplier;
 import com.google.common.util.concurrent.*;
-import com.sun.org.apache.regexp.internal.RE;
 
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 
@@ -21,12 +19,7 @@ class Provider {
     }
 
     public Thing getActiveThing() {
-        ListenableFuture<ModelKeeper> future = mExecutor.submit(new Callable<ModelKeeper>() {
-            @Override
-            public ModelKeeper call() throws Exception {
-                return modelKeeperSupplier.get();
-            }
-        });
+        ListenableFuture<ModelKeeper> future = mExecutor.submit(() -> modelKeeperSupplier.get());
 
         ListenableFuture<Thing> thingListenableFuture = Futures.transformAsync(future, new AsyncFunction<ModelKeeper, Thing>() {
 
@@ -35,20 +28,10 @@ class Provider {
             @Override
             public ListenableFuture<Thing> apply(ModelKeeper modelKeeper) throws Exception {
 
-                mExecutor.submit(new Callable<Thing>() {
-                    @Override
-                    public Thing call() throws Exception {
-                        return findActiveThing(mModel);
-                    }
+                return mExecutor.submit(() -> {
+                    modelKeeper.applyModel(model -> mModel = model);
+                    return findActiveThing(mModel);
                 });
-
-                /*modelKeeper.applyModel(new ModelApplier<MainModel>() {
-                    @Override
-                    public void with(MainModel model) {
-                        mModel = model; // this is needed ? maybe not
-                    }
-                });
-                return findActiveThing(mModel);*/
             }
         }, mExecutor);
 
@@ -62,7 +45,6 @@ class Provider {
             }
         });*/
 
-        System.out.println("Done getting and applying the model");
         //return findActiveThing(mModel);
 
         try {

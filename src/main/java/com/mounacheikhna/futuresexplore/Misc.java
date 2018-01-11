@@ -8,7 +8,7 @@ public final class Misc {
         String anim = "|/-\\";
         System.out.println(name + " : ");
         try {
-            for (int x = 0; x < 10; x++) {
+            for (int x = 0; x < 30; x++) {
                 String data = "\r" + anim.charAt(x % anim.length()) + " " + x;
                 System.out.write(data.getBytes());
                 Thread.sleep(100);

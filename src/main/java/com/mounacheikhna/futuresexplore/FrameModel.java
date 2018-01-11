@@ -10,12 +10,20 @@ public class FrameModel {
             return new ModelKeeper();
         });
 
+        System.out.println("First ");
         provider.getActiveThing();
+        System.out.println("Next action after First in FrameModel can now run");
+
+        System.out.println("Second ");
+        provider.getActiveThing();
+        System.out.println("Next action after Second in FrameModel can now run");
+
+        System.out.println("Third ");
+        provider.getActiveThing();
+        System.out.println("Next action after Third in FrameModel can now run");
 
         // what do we want ? here
-
         // the options we have are to block or provide a callable thing ?
-        System.out.println("Next action in FrameModel can now run (will determine whether getting active thing blocked us)");
     }
 
 }
