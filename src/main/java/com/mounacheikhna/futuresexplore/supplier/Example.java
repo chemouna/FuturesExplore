@@ -9,13 +9,25 @@ import com.google.common.base.Suppliers;
 
 public class Example {
 
-    private final Supplier<Dependency> mDependencySupplier;
+    private final State mState;
 
     public Example(DependencyProvider provider) {
-        mDependencySupplier = Suppliers.memoize(() -> provider.provideDependency());
+        mState = new State(Suppliers.memoize(() -> provider.provideDependency()));
     }
 
     public void printDependency() {
-        mDependencySupplier.get().print();
+        mState.getDependency().print();
+    }
+
+    static class State {
+        private Supplier<Dependency> mDependencySupplier;
+
+        public State(Supplier<Dependency> mDependencySupplier) {
+            this.mDependencySupplier = mDependencySupplier;
+        }
+
+        public Dependency getDependency() {
+            return mDependencySupplier.get();
+        }
     }
 }
