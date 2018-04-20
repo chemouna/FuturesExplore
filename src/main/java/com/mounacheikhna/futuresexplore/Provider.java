@@ -7,11 +7,12 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 
+// ToolbarCampaignIconProviderImpl
 class Provider {
 
     private final ListeningExecutorService mExecutor;
     private Supplier<ModelKeeper> modelKeeperSupplier;
-    //private MainModel mModel;
+    //private MainModel mCurrentModel;
 
     public Provider(Supplier<ModelKeeper> modelKeeperSupplier) {
         this.modelKeeperSupplier = modelKeeperSupplier;
@@ -20,7 +21,6 @@ class Provider {
 
     public Thing getActiveThing() {
         ListenableFuture<ModelKeeper> future = mExecutor.submit(() -> modelKeeperSupplier.get());
-
         ListenableFuture<Thing> thingListenableFuture = Futures.transformAsync(future, new AsyncFunction<ModelKeeper, Thing>() {
 
             public MainModel mModel;

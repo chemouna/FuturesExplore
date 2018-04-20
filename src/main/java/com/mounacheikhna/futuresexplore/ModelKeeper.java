@@ -2,6 +2,7 @@ package com.mounacheikhna.futuresexplore;
 
 import java.util.Arrays;
 
+// <=> BiboModel (specialy like BiboModel<Campaign>)
 public class ModelKeeper {
 
     private DownloadedData downloadedData;
